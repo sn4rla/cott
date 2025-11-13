@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cott – Quietly keep your home in shape</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Optional: premium-ish font pairing -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap">
+
+  <style>
+    :root {
+      --bg: #f6f6f4;
+      --bg-alt: #ffffff;
+      --accent: #184a72;          /* deep premium blue */
+      --accent-soft: #e4edf6;
+      --text-main: #1f242a;
+      --text-muted: #6c727a;
+      --border-subtle: #e0e2e5;
+      --shadow-soft: 0 18px 45px rgba(15, 30, 50, 0.08);
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont,
+        "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at top left, #fbfbfa, #f3f4f6);
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 20px 64px;
+    }
+
+    /* NAVBAR */
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 32px;               /* adjust to match your asset */
+      display: block;
+    }
+
+    .logo-subtitle {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      padding: 4px 0;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-cta {
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: #ffffffd9;
+      backdrop-filter: blur(10px);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .nav-cta:hover {
+      border-color: #ccd4de;
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 36px;
+      align-items: center;
+      margin-bottom: 64px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: "DM Serif Display", Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 4.4vw, 44px);
+      line-height: 1.05;
+      margin-bottom: 16px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 22px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .btn-primary {
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: var(--accent);
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 16px 38px rgba(16, 43, 70, 0.35);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.04);
+    }
+
+    .btn-ghost {
+      padding: 9px 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: #ffffffc9;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* HERO CARD */
+
+    .hero-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-xl);
+      padding: 20px 20px 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .home-label {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .home-pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .hero-card-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 18px;
+    }
+
+    .card-block {
+      padding: 10px 12px;
+      border-radius: var(--radius-lg);
+      background: #f7f8fa;
+      border: 1px solid var(--border-subtle);
+      font-size: 12px;
+    }
+
+    .card-block h4 {
+      font-size: 12px;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .tasks-list {
+      list-style: none;
+      margin-top: 6px;
+    }
+
+    .tasks-list li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      padding: 3px 0;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .dot-soft {
+      background: #c3ccd6;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      background: #eef1f6;
+      color: #3a4f68;
+    }
+
+    .corner-pill {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      background: #111827;
+      color: #f9fafb;
+      opacity: 0.9;
+      max-width: 60%;
+    }
+
+    /* SECTIONS */
+
+    .section {
+      margin-bottom: 56px;
+    }
+
+    .section-header {
+      margin-bottom: 18px;
+    }
+
+    .section-header h2 {
+      font-family: "DM Serif Display", Georgia, "Times New Roman", serif;
+      font-size: 22px;
+      margin-bottom: 4px;
+      letter-spacing: 0.01em;
+    }
+
+    .section-header p {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 560px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: #fcfcfd;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 14px 14px 16px;
+      font-size: 13px;
+    }
+
+    .feature-card h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .feature-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: #e5edf7;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      font-size: 13px;
+    }
+
+    .step {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 14px;
+    }
+
+    .step-number {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .step h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      color: #374151;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-card {
+        order: -1;
+      }
+
+      .features-grid,
+      .how-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+
+      .page {
+        padding-inline: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- NAVBAR -->
+    <header class="nav">
+      <div class="logo">
+        <!-- swap filename / type to whatever you export -->
+        <img src="cott-logo.png" alt="Cott logo">
+        <div class="logo-subtitle">HOME MANAGEMENT</div>
+      </div>
+      <nav class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#for">Who it’s for</a>
+        <button class="nav-cta">Sign in</button>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="pill-dot"></span>
+          Quiet home management
+        </div>
+        <h1>
+          Keep your <span>home</span> in shape,<br />
+          without keeping it all in your head.
+        </h1>
+        <p class="hero-sub">
+          Cott is your quiet home manager. Track maintenance, projects, and
+          records in one place—so your home stays in good condition and grows in
+          value over time.
+        </p>
+        <div class="hero-cta-row">
+          <button class="btn-primary">Get started – it’s free</button>
+          <button class="btn-ghost">View sample home</button>
+        </div>
+        <p class="hero-note">
+          Smart schedules, gentle reminders, and a living record of your home —
+          all in one app.
+        </p>
+      </div>
+
+      <!-- HERO CARD MOCKUP -->
+      <aside class="hero-card" aria-label="Preview of Cott app">
+        <div class="hero-card-header">
+          <div>
+            <div class="home-label">Maple Street Cott</div>
+            <div class="hero-note">3 bed · 2.5 bath · Built 1988</div>
+          </div>
+          <span class="home-pill">On track this month</span>
+        </div>
+
+        <div class="hero-card-grid">
+          <div class="card-block">
+            <h4>Upcoming upkeep</h4>
+            <ul class="tasks-list">
+              <li>
+                <span class="dot"></span>
+                Clean gutters · Due in 5 days
+              </li>
+              <li>
+                <span class="dot-soft"></span>
+                HVAC filter change · Next month
+              </li>
+              <li>
+                <span class="dot-soft"></span>
+                Sump pump test · Quarterly
+              </li>
+            </ul>
+            <div class="meta-row">
+              <span>3 tasks this week</span>
+              <span>Auto-scheduled</span>
+            </div>
+          </div>
+
+          <div class="card-block">
+            <h4>Home health snapshot</h4>
+            <div class="meta-row">
+              <span>Records stored</span>
+              <strong>42</strong>
+            </div>
+            <div class="meta-row">
+              <span>Projects in progress</span>
+              <strong>3</strong>
+            </div>
+            <div class="tag-row">
+              <span class="tag">Maintenance log</span>
+              <span class="tag">Receipts</span>
+              <span class="tag">Before / after</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="corner-pill">
+          “Cott remembers all the little things, so I don’t have to.”
+        </div>
+      </aside>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section">
+      <div class="section-header">
+        <h2>Everything your home needs, in one calm place.</h2>
+        <p>
+          Cott keeps your home up to date with smart schedules, organized
+          records, and gentle reminders—not noisy alerts.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <span class="feature-tag">Upkeep</span>
+          <h3>Smart maintenance schedule</h3>
+          <p>
+            Add your home once, and Cott builds a living upkeep plan—gutters,
+            filters, inspections, seasonal tasks, and more—so nothing slips
+            through.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-tag">Organization</span>
+          <h3>Records that live with your home</h3>
+          <p>
+            Store receipts, manuals, paint colors, contractors, and notes
+            alongside each space and system, ready for the next project—or the
+            next owner.
+          </p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-tag">Planning</span>
+          <h3>Plan projects, not just chores</h3>
+          <p>
+            Capture ideas, prioritize projects, and track progress over time—from
+            “fix that drip” to “finish the basement”—without losing the big
+            picture.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="section">
+      <div class="section-header">
+        <h2>How Cott works</h2>
+        <p>Built to feel like a calm layer around your home, not another job.</p>
+      </div>
+
+      <div class="how-grid">
+        <div class="step">
+          <div class="step-number">Step 1</div>
+          <h3>Add your home in minutes</h3>
+          <p>
+            Tell Cott the basics—year built, systems, and a few details about
+            your spaces. Start from a template or build your home room by room.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-number">Step 2</div>
+          <h3>Let Cott build the upkeep plan</h3>
+          <p>
+            Cott suggests a maintenance schedule for your home and climate. Edit
+            it once, and it quietly keeps everything up to date going forward.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-number">Step 3</div>
+          <h3>Stay ahead, without thinking about it</h3>
+          <p>
+            Get gentle reminders when something needs attention, plus a
+            shareable record that shows how well you care for your home.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO IT'S FOR -->
+    <section id="for" class="section">
+      <div class="section-header">
+        <h2>Made for people who want less mental clutter at home.</h2>
+        <p>
+          Whether it’s your first home or your forever home, Cott gives you a
+          quiet sense that things are taken care of.
+        </p>
+      </div>
+
+      <div class="badge-row">
+        <span class="badge">First-time homeowners</span>
+        <span class="badge">Busy parents</span>
+        <span class="badge">Couples sharing the load</span>
+        <span class="badge">Landlords of 1–3 units</span>
+        <span class="badge">People planning long-term projects</span>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span>© <span id="year"></span> Cott</span>
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#for">Who it’s for</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
